@@ -35,11 +35,14 @@ mongoose.connection
 ////////////////////////////////
 const PeopleSchema = new mongoose.Schema({
   name: String,
-  image: String,
-  title: String,
+  address: String,
+  contact: Number,
+  email: String,
+  resume: String,
+  coveralaetter: String,
 });
 
-const People = mongoose.model("People", PeopleSchema);
+const Job = mongoose.model("Job", PeopleSchema);
 
 ///////////////////////////////
 // MiddleWare
@@ -56,45 +59,55 @@ app.get("/", (req, res) => {
   res.send("hello world");
 });
 
-// PEOPLE INDEX ROUTE
-app.get("/people", async (req, res) => {
+// JOB INDEX ROUTE
+app.get("/job", async (req, res) => {
   try {
-    // send all people
-    res.json(await People.find({}));
+    // send all job
+    res.json(await Job.find({}));
   } catch (error) {
     //send error
     res.status(400).json(error);
   }
 });
 
-// PEOPLE CREATE ROUTE
-app.post("/people", async (req, res) => {
+// JOB CREATE ROUTE
+app.post("/job", async (req, res) => {
   try {
-    // send all people
-    res.json(await People.create(req.body));
+    // send all job
+    res.json(await Job.create(req.body));
+  } catch (error) {
+    //send error
+    res.status(400).json(error);
+  }
+});
+// app.post('/fruits', (req, res) => {
+//   if(req.body.readyToEat === 'on'){ //if checked, req.body.readyToEat is set to 'on'
+//       req.body.readyToEat = true; //do some data correction
+//   } else { //if not checked, req.body.readyToEat is undefined
+//       req.body.readyToEat = false; //do some data correction
+//   }
+//   fruits.push(req.body);
+//   console.log(fruits);
+//   res.send('data received');
+// });
+
+// JOB DELETE ROUTE
+app.delete("/job/:id", async (req, res) => {
+  try {
+    // send all job
+    res.json(await Job.findByIdAndRemove(req.params.id));
   } catch (error) {
     //send error
     res.status(400).json(error);
   }
 });
 
-// PEOPLE DELETE ROUTE
-app.delete("/people/:id", async (req, res) => {
+// JOB UPDATE ROUTE
+app.put("/job/:id", async (req, res) => {
   try {
-    // send all people
-    res.json(await People.findByIdAndRemove(req.params.id));
-  } catch (error) {
-    //send error
-    res.status(400).json(error);
-  }
-});
-
-// PEOPLE UPDATE ROUTE
-app.put("/people/:id", async (req, res) => {
-  try {
-    // send all people
+    // send all job
     res.json(
-      await People.findByIdAndUpdate(req.params.id, req.body, { new: true })
+      await Job.findByIdAndUpdate(req.params.id, req.body, { new: true })
     );
   } catch (error) {
     //send error
