@@ -33,16 +33,16 @@ mongoose.connection
 ///////////////////////////////
 // MODELS
 ////////////////////////////////
-const PeopleSchema = new mongoose.Schema({
+const JobSchema = new mongoose.Schema({
   name: String,
   address: String,
   contact: Number,
   email: String,
   resume: String,
-  coveralaetter: String,
+  coverletter: String,
 });
 
-const Job = mongoose.model("Job", PeopleSchema);
+const Job = mongoose.model("Job", JobSchema);
 
 ///////////////////////////////
 // MiddleWare
