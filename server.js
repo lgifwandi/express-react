@@ -36,10 +36,11 @@ mongoose.connection
 const JobSchema = new mongoose.Schema({
   name: String,
   address: String,
-  contact: Number,
+  contact: String,
   email: String,
   resume: String,
-  coverletter: String,
+  cover: String,
+  // isHired: Boolean,
 });
 
 const Job = mongoose.model("Job", JobSchema);
@@ -79,6 +80,12 @@ app.post("/job", async (req, res) => {
     //send error
     res.status(400).json(error);
   }
+  // if(req.body.isHired === 'on'){ 
+  //   req.body.isHired = true; 
+  // } else { 
+  //   req.body.isHired = false; 
+  // }
+  // Job.push(req.body);
 });
 // app.post('/fruits', (req, res) => {
 //   if(req.body.readyToEat === 'on'){ //if checked, req.body.readyToEat is set to 'on'
